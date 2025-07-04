@@ -1,6 +1,7 @@
 <?php
 //エラー表示
 ini_set("display_errors", 1);
+include("funcs.php");
 
 //1. POSTデータ取得
 $bkname = $_POST['bkname'];
@@ -9,12 +10,7 @@ $comment = $_POST['comment'];
 
 
 //2. DB接続します
-try {
-  //Password:MAMP='root',XAMPP=''
-  $pdo = new PDO('mysql:dbname=azureokapi71_gs_kadai_db;charset=utf8;host=mysql80.azureokapi71.sakura.ne.jp','****','*****');
-} catch (PDOException $e) {
-  exit('DBConnection Error:'.$e->getMessage());
-}
+$pdo = db_conn();
 
 
 //３．データ登録SQL作成
@@ -27,12 +23,10 @@ $status = $stmt->execute();
 
 //４．データ登録処理後
 if($status==false){
-  //SQL実行時にエラーがある場合（エラーオブジェクト取得して表示）
-  $error = $stmt->errorInfo();
-  exit("SQL_Error:".$error[2]);
+    //*** function化する！*****************
+    sql_error($stmt);
 }else{
-  //５．index.phpへリダイレクト
-  header("Location: index.php");
-  exit();
+    //*** function化する！*****************
+    redirect("index.php");
 }
 ?>
