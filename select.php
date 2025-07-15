@@ -4,13 +4,11 @@ ini_set("display_errors", 1);
 
 include("funcs.php");
 
+session_start();
+// var_dump($_SESSION);
+sschk();
+
 //1.  DB接続します
-// try {
-  //Password:MAMP='root',XAMPP=''
-//   $pdo = new PDO('mysql:dbname=azureokapi71_gs_kadai_db;charset=utf8;host=mysql80.azureokapi71.sakura.ne.jp','*****','*****');
-// } catch (PDOException $e) {
-//   exit('DBConnection Error:'.$e->getMessage());
-// }
 
 $pdo = db_conn();
 
@@ -26,19 +24,16 @@ if($status==false) {
   sql_error($stmt);
 
 }else{
-  while( $res = $stmt->fetch(PDO::FETCH_ASSOC)){
-    //var_dump($res);
-    $view .= '<p><a href="bm_update_view.php?id='.$res['id'].'">';
-    $view .= $res['id'].'.'.$res['bkname'].'.'.$res['bkurl'].'.'.$res['comment'];
-    $view .= '</a><a href="bm_delete.php?id='.$res['id'].'">[削除]</p>';
-    // var_dump($view);
-  }
+  // while( $res = $stmt->fetch(PDO::FETCH_ASSOC)){
+  //   //var_dump($res);
+  //   $view .= '<p><a href="bm_update_view.php?id='.$res['id'].'">';
+  //   $view .= $res['id'].'.'.$res['bkname'].'.'.$res['bkurl'].'.'.$res['comment'];
+  //   if($_SESSION["kanri_flg"] == "1" ){
+  //     $view .= '</a><a href="bm_delete.php?id='.$res['id'].'">[削除]</p>';
+  //   };
+  //全データ取得
+  $values =  $stmt->fetchAll(PDO::FETCH_ASSOC);//PDO::FETCH_ASSOC[カラム名のみで取得できるモード]
 }
-
-//全データ取得
-$values =  $stmt->fetchAll(PDO::FETCH_ASSOC); //PDO::FETCH_ASSOC[カラム名のみで取得できるモード]
-//JSONい値を渡す場合に使う
-// $json = json_encode($values,JSON_UNESCAPED_UNICODE);
 
 ?>
 
@@ -59,9 +54,13 @@ $values =  $stmt->fetchAll(PDO::FETCH_ASSOC); //PDO::FETCH_ASSOC[カラム名の
 <header>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-      <div class="navbar-header">
-      <a class="navbar-brand" href="index.php">ブックマーク登録画面へ</a>
-      </div>
+      <div class="navbar-header"><a class="navbar-brand" href="index.php">データ登録</a></div>
+      <div class="navbar-header"><a class="navbar-brand" href="select.php">データ一覧</a></div>
+      <div class="navbar-header"><a class="navbar-brand" href="login.php">ログイン</a></div>
+      <div class="navbar-header"><a class="navbar-brand" href="logout.php">ログアウト</a></div>
+      <?php if($_SESSION["kanri_flg"] == "1"){ ?>
+        <div class="navbar-header"><a class="navbar-brand" href="user.php">ユーザ登録</a></div>
+      <?php } ?>
     </div>
   </nav>
 </header>
@@ -70,17 +69,43 @@ $values =  $stmt->fetchAll(PDO::FETCH_ASSOC); //PDO::FETCH_ASSOC[カラム名の
 
 <!-- Main[Start] -->
 <div>
-    <div>New! DBの更新・削除処理を追加しました</div>
-    <div>注意！[削除]をクリックするとすぐに削除されます</div>
-    <div class="container jumbotron"><?=$view?></div>
+    <div>2025/07/15 ログイン・ログアウト機能を追加しました。一覧のデザインを改善しました。</div>
+    <div>2025/07/08 DBの更新・削除処理を追加しました</div>
+    <div class="container jumbotron">
+    <table class="table">
+      <tr>
+        <th>id</th>
+        <th>書籍名</th>
+        <th>書籍URL</th>
+        <th>コメント</th>
+        <th>操作</th>
+        <?php
+          if($_SESSION["kanri_flg"] == "1"){ ?>
+          <th>削除</th>
+        <?php  } ?>
+      </tr>
+    <?php foreach($values as $v){ ?>
+      <tr>
+        <td><?=$v["id"]?></td>
+        <td><?=$v["bkname"]?></td>
+        <td><?=$v["bkurl"]?></td>
+        <td><?=$v["comment"]?></td>
+        <td> <a href="bm_update_view.php?id=<?=$v["id"]?>">[詳細]</a></td>
+        <?php
+          if($_SESSION["kanri_flg"] == "1"){ ?>
+            <td><a href="bm_delete.php?id=<?=$v["id"]?>" onclick="return confirm('本当に削除しますか？');">[削除]</a></td>
+          <?php }?>
+        </tr>
+    <?php } ?>
+    </table>
+    </div>
+   
 </div>
 <!-- Main[End] -->
 
 
 <script>
-  //JSON受け取り
-  const a = '<?php echo $json; ?>';
-  console.log(JSON.parse(a));
+ 
 
 
 </script>

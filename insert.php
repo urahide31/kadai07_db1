@@ -1,7 +1,9 @@
 <?php
 //エラー表示
+session_start();
 ini_set("display_errors", 1);
 include("funcs.php");
+sschk();
 
 //1. POSTデータ取得
 $bkname = $_POST['bkname'];
@@ -27,6 +29,6 @@ if($status==false){
     sql_error($stmt);
 }else{
     //*** function化する！*****************
-    redirect("index.php");
+    redirect("select.php");
 }
 ?>

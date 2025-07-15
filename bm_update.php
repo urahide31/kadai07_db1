@@ -1,6 +1,9 @@
 <?php
 include("funcs.php");
 
+session_start();
+sschk();
+
 //エラー表示
 ini_set("display_errors", 1);
 

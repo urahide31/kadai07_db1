@@ -3,6 +3,8 @@
 ini_set("display_errors", 1);
 
 include("funcs.php");
+session_start();
+sschk();
 
 //1. GETデータ取得
 $id = $_GET['id'];

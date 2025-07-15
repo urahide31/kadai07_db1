@@ -1,4 +1,9 @@
 <?php
+//0. セッションチェック
+include("funcs.php");
+session_start();
+sschk();
+
 //1. POSTデータ取得
 $id = $_GET["id"];
 
