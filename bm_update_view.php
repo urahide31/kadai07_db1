@@ -35,7 +35,7 @@ $row = $stmt->fetch();
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ブックマーク登録</title>
+  <title>要注意顧客情報登録</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <style>div{padding: 10px;font-size:16px;}</style>
 </head>
@@ -45,7 +45,7 @@ $row = $stmt->fetch();
 <header>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-    <div class="navbar-header"><a class="navbar-brand" href="select.php">ブックマーク一覧へ</a></div>
+    <div class="navbar-header"><a class="navbar-brand" href="select.php">顧客情報一覧へ</a></div>
     </div>
   </nav>
 </header>
@@ -56,9 +56,9 @@ $row = $stmt->fetch();
   <div class="jumbotron">
    <fieldset>
     <legend>更新したい内容を入力して「更新」をクリック</legend>
-     <label>書籍名：<input type="text" name="bkname" value="<?=$row["bkname"]?>"></label><br>
-     <label>書籍URL：<input type="text" name="bkurl" value="<?=$row["bkurl"]?>"></label><br>
-     <label>書籍コメント：<textArea name="comment" rows="4" cols="40"><?=$row["comment"]?></textArea></label><br>
+     <label>顧客名：<input type="text" name="bkname" value="<?=$row["bkname"]?>"></label><br>
+     <label>連絡先：<input type="text" name="bkurl" value="<?=$row["bkurl"]?>"></label><br>
+     <label>コメント：<textArea name="comment" rows="4" cols="40"><?=$row["comment"]?></textArea></label><br>
      <!-- idを隠して送信 -->
      <input type="hidden" name="id" value="<?=$row["id"]?>">
      <input type="submit" value="更新">

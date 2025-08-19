@@ -44,7 +44,7 @@ if($status==false) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ブックマーク一覧表示</title>
+<title>要注意顧客情報一覧表示</title>
 <link rel="stylesheet" href="css/range.css">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <style>div{padding: 10px;font-size:16px;}</style>
@@ -75,8 +75,8 @@ if($status==false) {
     <table class="table">
       <tr>
         <th>id</th>
-        <th>書籍名</th>
-        <th>書籍URL</th>
+        <th>顧客名</th>
+        <th>連絡先</th>
         <th>コメント</th>
         <th>操作</th>
         <?php

@@ -8,7 +8,7 @@ sschk();
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ブックマーク登録</title>
+  <title>顧客情報登録</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <style>div{padding: 10px;font-size:16px;}</style>
 </head>
@@ -18,7 +18,7 @@ sschk();
 <header>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-    <div class="navbar-header"><a class="navbar-brand" href="select.php">ブックマーク一覧へ</a></div>
+    <div class="navbar-header"><a class="navbar-brand" href="select.php">要注意顧客一覧へ</a></div>
     </div>
   </nav>
 </header>
@@ -28,10 +28,10 @@ sschk();
 <form method="post" action="insert.php">
   <div class="jumbotron">
    <fieldset>
-    <legend>ブックマーク登録（本だけに）</legend>
-     <label>書籍名：<input type="text" name="bkname"></label><br>
-     <label>書籍URL：<input type="text" name="bkurl"></label><br>
-     <label>書籍コメント：<textArea name="comment" rows="4" cols="40"></textArea></label><br>
+    <legend>要注意顧客情報登録</legend>
+     <label>顧客名：<input type="text" name="bkname"></label><br>
+     <label>連絡先情報：<input type="text" name="bkurl"></label><br>
+     <label>共有コメント：<textArea name="comment" rows="4" cols="40"></textArea></label><br>
      <input type="submit" value="送信">
     </fieldset>
   </div>

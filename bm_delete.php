@@ -8,7 +8,7 @@ sschk();
 $id = $_GET["id"];
 
 //2. DB接続します
-include("funcs.php");
+// include("funcs.php");
 $pdo = db_conn();
 
 //３．データ登録SQL作成
